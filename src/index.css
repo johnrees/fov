@@ -11,3 +11,21 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+td {
+  width: 12px;
+  height: 12px;
+  border: 1px solid #999;
+}
+
+.cell0 {
+  background: #999;
+}
+
+.cell1 {
+  background: #66f;
+}
+
+.cellplayer {
+  background: #fa6;
+}
