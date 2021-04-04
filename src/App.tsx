@@ -26,6 +26,7 @@ function scan_arc(
     // we rotate it by a multiple of 90 degrees so we can scan in 4 directions
     var x = player.x + rotate(distance, i)[0];
     var y = player.y + rotate(distance, i)[1];
+    console.log({ x, y });
     // if our line of sight is blocked,
     // recursively scan at depth + 1 to the side of the block.
     if (map.get(x, y) === BLOCK) {
@@ -76,14 +77,14 @@ class Map {
 }
 
 function Grid() {
-  const ref = useRef(null);
+  const ref = useRef<HTMLTableElement>(null);
 
   useEffect(() => {
     if (!ref.current) return;
 
     const player: Player = { x: 4, y: 5 };
 
-    const map = new Map(ref.current as any, 16, [
+    const map = new Map(ref.current, 50, [
       [3, 3],
       [4, 3],
       [5, 3],
@@ -103,6 +104,10 @@ function Grid() {
     scan_arc(map, player, 0, -1, 1, (x, y) => [-y, x]);
     map.set(player.x, player.y, "player");
     map.show();
+
+    return () => {
+      ref.current!.innerHTML = "";
+    };
   }, []);
   return <table ref={ref} />;
 }
